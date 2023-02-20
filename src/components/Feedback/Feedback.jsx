@@ -16,14 +16,19 @@ class Feedback extends Component {
     this.setState(prevState => ({ [name]: prevState[name] + 1 }));
   };
 
+  // countTotalFeedback = () => {
+  //   const feedbackArrValue = Object.values(this.state);
+  //   return feedbackArrValue.reduce((total, item) => (total += item), 0);
+  // };
+
   countTotalFeedback = () => {
-    const feedbackArrValue = Object.values(this.state);
-    return feedbackArrValue.reduce((total, item) => (total += item), 0);
+    const TotalFeedback = this.state.good + this.state.neutral + this.state.bad;
+    return TotalFeedback;
   };
 
-  countPositiveFeedbackPercentage(propName) {
+  countPositiveFeedbackPercentage() {
     const { good, neutral, bad } = this.state;
-    const value = this.state[propName];
+    const value = good;
     const total = good + neutral + bad;
 
     if (!total) {
@@ -37,13 +42,17 @@ class Feedback extends Component {
   render() {
     const { good, neutral, bad } = this.state;
 
+    const options = Object.keys(this.state);
     const total = this.countTotalFeedback();
     const goodPercent = this.countPositiveFeedbackPercentage('good');
 
     return (
       <div>
         <Section title="Please leave feedback">
-          <FeedbackOptions onClickFeedbackButton={this.onClickFeedbackButton} />
+          <FeedbackOptions
+            options={options}
+            onClickFeedbackButton={this.onClickFeedbackButton}
+          />
         </Section>
 
         <Section title="Statistics">

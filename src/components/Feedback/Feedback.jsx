@@ -22,8 +22,8 @@ class Feedback extends Component {
   // };
 
   countTotalFeedback = () => {
-    const TotalFeedback = this.state.good + this.state.neutral + this.state.bad;
-    return TotalFeedback;
+    const totalFeedback = this.state.good + this.state.neutral + this.state.bad;
+    return totalFeedback;
   };
 
   countPositiveFeedbackPercentage() {
